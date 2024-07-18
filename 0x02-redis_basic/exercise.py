@@ -15,11 +15,12 @@ def count_calls(method: Callable) -> Callable:
         """Generate the key using the qualified  name of the method"""
         key = f"{method.__qualname__}:count"
 
-        """#increment the counter in redis"""
+        #increment the counter in redis
         self._redis.incr(key)
 
-        """#call thr original method and return its result"""
+        #call thr original method and return its result
         return method(self, *args, **kwargs)
+
     return wrapper
 
 
