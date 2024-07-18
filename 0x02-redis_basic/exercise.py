@@ -54,7 +54,7 @@ class Cache:
             # Increment the counter in Redis
             self._redis.incr(key)
 
-            # Call the original method and return its result
+            # Call the original methods and return its result
             return method(self, *args, **kwargs)
 
         return wrapper
