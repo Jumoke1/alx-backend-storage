@@ -14,11 +14,10 @@ def count_calls(method: Callable) -> Callable:
     def wrapper(self, *args, **kwargs) -> Any:
         """Generate the key using the qualified name of the
         method and increment the counter in Redis."""
-        key = f"{method.__qualname__}:count"
 
         if isinstance(self._redis, redis.Redis):
             # Increment the counter in Redis
-            self._redis.incr(key)
+            self._redis.incr(method.__qualname__)
 
         # Call the original method and return its result
         return method(self, *args, **kwargs)
