@@ -55,4 +55,4 @@ class Cache:
         # Call the original method and return its result
         return method(self, *args, **kwargs)
 
-    return wrapper
+        return wrapper
