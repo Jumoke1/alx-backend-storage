@@ -25,6 +25,23 @@ def count_calls(method: Callable) -> Callable:
     return wrapper
 
 
+def call_history(method: Callable) -> Callable:
+    """decorator to store the history of input and output"""
+    @wraps(method)
+    def wrapper(self, *args, **kwargs) -> Any:
+        """Return the method output after storing the input"""
+        input_key = '{}:inputs'.format(method.__qualname__)
+        output_key = '{}:outputs'.format(method.__qualname__)
+
+        if isinstance(self._redis, redis.Redis):
+            self._redis.rpush(in_key, str(args))
+        output = method(self, *args, **kwargs)
+        if isinstance(self._redis, redis.Redis):
+            self._redis.rpush(out_key, output)
+        return output
+    return wrapper
+
+
 class Cache:
     '''Defines a class Cache'''
 
