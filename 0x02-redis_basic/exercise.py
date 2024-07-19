@@ -66,7 +66,6 @@ def replay(fn: Callable) -> None:
         ))
 
 
-
 class Cache:
     '''Defines a class Cache'''
 
