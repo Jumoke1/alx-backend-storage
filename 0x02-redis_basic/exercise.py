@@ -21,7 +21,6 @@ def count_calls(method: Callable) -> Callable:
 
         # Call the original method and return its result
         return method(self, *args, **kwargs)
-
     return wrapper
 
 
